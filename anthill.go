@@ -36,7 +36,7 @@ func (ah *Anthill) Act() {
 	// random chance to spawn a new ant
 	r := rand.New(rand.NewSource(time.Now().UnixNano())) // have to re-seed each time, apparently :(
 	rint := r.Intn(10)
-	if rint > 1 {
+	if rint > 8 {
 		ah.SpawnAnt()
 	}
 

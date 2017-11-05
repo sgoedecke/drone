@@ -14,12 +14,12 @@ func (w *World) Draw() {
 
 	// draw walls
 	for y := 0; y < w.Height; y++ {
-		termbox.SetCell(w.X, w.Y+y, 35, termbox.ColorDefault, termbox.ColorDefault)         //#
+		termbox.SetCell(w.X-1, w.Y+y, 35, termbox.ColorDefault, termbox.ColorDefault)       //#
 		termbox.SetCell(w.X+w.Width, w.Y+y, 35, termbox.ColorDefault, termbox.ColorDefault) //#
 	}
 
 	for x := 0; x < w.Width; x++ {
-		termbox.SetCell(w.X+x, w.Y, 35, termbox.ColorDefault, termbox.ColorDefault)          //#
+		termbox.SetCell(w.X+x, w.Y-1, 35, termbox.ColorDefault, termbox.ColorDefault)        //#
 		termbox.SetCell(w.X+x, w.Y+w.Height, 35, termbox.ColorDefault, termbox.ColorDefault) //#
 	}
 	_ = termbox.Flush()
