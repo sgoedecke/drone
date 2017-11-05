@@ -4,18 +4,20 @@ import (
 	"time"
 )
 
+type World struct {
+	Anthills []Anthill
+	Width    int
+	Height   int
+	X        int
+	Y        int
+}
+
 func (w *World) Loop() {
 	for {
 		w.Act()
 		w.Draw() // draw the world
 		time.Sleep(100 * time.Millisecond)
 	}
-}
-
-type World struct {
-	Anthills []Anthill
-	Width    int
-	Height   int
 }
 
 func (w *World) HandleCollision(ant1 *Ant, ant2 *Ant) {
@@ -29,7 +31,7 @@ func (w *World) HandleCollision(ant1 *Ant, ant2 *Ant) {
 }
 
 func (w *World) Act() {
-	for i,_ := range w.Anthills {
+	for i, _ := range w.Anthills {
 		w.Anthills[i].Act()
 	}
 }

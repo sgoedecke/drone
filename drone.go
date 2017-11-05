@@ -25,13 +25,15 @@ func main() {
 	w := World{}
 	w.Width = 80
 	w.Height = 40
+	w.X = 1
+	w.Y = 1
 
 	a1 := Anthill{}
 	a1.X = 5
 	a1.Y = 5
 	a1.Color = termbox.ColorRed
 	a1.World = &w
-  a1.SpawnAnt()
+	a1.SpawnAnt()
 	w.Anthills = append(w.Anthills, a1)
 
 	a2 := Anthill{}
