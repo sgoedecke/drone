@@ -7,11 +7,12 @@ import (
 )
 
 type Anthill struct {
-	Ants  []Ant
-	X     int
-	Y     int
-	Color termbox.Attribute
-	World *World
+	Ants       []Ant
+	Pheromones []Pheromone
+	X          int
+	Y          int
+	Color      termbox.Attribute
+	World      *World
 }
 
 func (ah *Anthill) SpawnAnt() {
@@ -56,4 +57,15 @@ func (ah *Anthill) Act() {
 		}
 	}
 	ah.Ants = newants
+
+	// age all pheromones and purge old pheromones
+	var np []Pheromone
+	for i := range ah.Pheromones {
+		p := ah.Pheromones[i]
+		p.Age = p.Age + 1
+		if p.Age < 30 { // pheromone age
+			np = append(np, p)
+		}
+	}
+	ah.Pheromones = np
 }

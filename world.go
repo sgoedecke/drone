@@ -6,6 +6,7 @@ import (
 
 type World struct {
 	Anthills []Anthill
+	Food     []Food
 	Width    int
 	Height   int
 	X        int

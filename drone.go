@@ -33,15 +33,22 @@ func main() {
 	a1.Y = 5
 	a1.Color = termbox.ColorRed
 	a1.World = &w
-	a1.SpawnAnt()
 	w.Anthills = append(w.Anthills, a1)
 
 	a2 := Anthill{}
-	a2.X = 10
-	a2.Y = 15
+	a2.X = 76
+	a2.Y = 30
 	a2.Color = termbox.ColorGreen
 	a2.World = &w
 	w.Anthills = append(w.Anthills, a2)
+
+	for i := 0; i < 50; i++ {
+		f := Food{}
+		f.X = 80 - i
+		f.Y = 35 + i/10
+		f.World = &w
+		w.Food = append(w.Food, f)
+	}
 
 	// kick off the act -> draw loop
 	go w.Loop()
