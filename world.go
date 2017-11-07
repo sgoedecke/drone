@@ -5,12 +5,13 @@ import (
 )
 
 type World struct {
-	Anthills []Anthill
-	Food     []Food
-	Width    int
-	Height   int
-	X        int
-	Y        int
+	Anthills    []Anthill
+	Food        []Food
+	FoodSources []FoodSource
+	Width       int
+	Height      int
+	X           int
+	Y           int
 }
 
 func (w *World) Loop() {
@@ -34,6 +35,9 @@ func (w *World) HandleCollision(ant1 *Ant, ant2 *Ant) {
 func (w *World) Act() {
 	for i, _ := range w.Anthills {
 		w.Anthills[i].Act()
+	}
+	for i, _ := range w.FoodSources {
+		w.FoodSources[i].Act()
 	}
 }
 

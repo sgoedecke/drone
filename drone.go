@@ -44,13 +44,17 @@ func main() {
 	a2.Food = 5
 	w.Anthills = append(w.Anthills, a2)
 
-	for i := 0; i < 50; i++ {
-		f := Food{}
-		f.X = 80 - i
-		f.Y = 35 + i/10
-		f.World = &w
-		w.Food = append(w.Food, f)
-	}
+	fs := FoodSource{}
+	fs.X = 30
+	fs.Y = 10
+	fs.World = &w
+	w.FoodSources = append(w.FoodSources, fs)
+
+	fs2 := FoodSource{}
+	fs2.X = 50
+	fs2.Y = 30
+	fs2.World = &w
+	w.FoodSources = append(w.FoodSources, fs2)
 
 	// kick off the act -> draw loop
 	go w.Loop()

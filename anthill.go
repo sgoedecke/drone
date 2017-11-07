@@ -46,15 +46,22 @@ func (ah *Anthill) Die() {
 }
 
 func (ah *Anthill) Act() {
-	if ah.Food <= 0 {
+	r := rand.New(rand.NewSource(time.Now().UnixNano())) // have to re-seed each time, apparently :(
+
+	// the anthill has a random chance (depending on the number of ants) to lose food
+	rint := r.Intn(100)
+	if rint < len(ah.Ants) {
+		ah.Food--
+	}
+
+	if ah.Food <= 0 && len(ah.Ants) == 0 {
 		ah.Die()
 		return
 	}
 
 	// random chance to spawn a new ant
-	r := rand.New(rand.NewSource(time.Now().UnixNano())) // have to re-seed each time, apparently :(
-	rint := r.Intn(100)
-	if rint <= ah.Food {
+	rint = r.Intn(100)
+	if ah.Food > 1 && len(ah.Ants) < 30 && rint <= ah.Food {
 		ah.SpawnAnt()
 	}
 

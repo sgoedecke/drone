@@ -23,6 +23,7 @@ func (a *Ant) Act() {
 		return
 	}
 
+	// set the ant's state properly, decide what needs to be done
 	// if the ant is roaming, look for food/pheromones. otherwise drop one
 	if !a.Focused && !a.HasFood {
 
@@ -62,12 +63,21 @@ func (a *Ant) Act() {
 		}
 	}
 
+	// move the ant based on its mental state
+	lastX := a.X
+	lastY := a.Y
+
 	if a.HasFood {
 		// move back to anthill
 		a.MoveTo(a.Anthill.X, a.Anthill.Y)
 	} else if a.Focused {
 		a.MoveTo(a.targetX, a.targetY)
 	} else {
+		a.Roam()
+	}
+
+	// if the ant's position hasn't changed, force a random move
+	if a.X == lastX && a.Y == lastY {
 		a.Roam()
 	}
 }
