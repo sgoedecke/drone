@@ -36,3 +36,11 @@ func (w *World) Act() {
 		w.Anthills[i].Act()
 	}
 }
+
+func (w *World) SpawnFood(x int, y int) {
+	f := Food{}
+	f.X = x
+	f.Y = y
+	f.World = w
+	w.Food = append(w.Food, f)
+}

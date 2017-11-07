@@ -33,6 +33,7 @@ func main() {
 	a1.Y = 5
 	a1.Color = termbox.ColorRed
 	a1.World = &w
+	a1.Food = 5
 	w.Anthills = append(w.Anthills, a1)
 
 	a2 := Anthill{}
@@ -40,6 +41,7 @@ func main() {
 	a2.Y = 30
 	a2.Color = termbox.ColorGreen
 	a2.World = &w
+	a2.Food = 5
 	w.Anthills = append(w.Anthills, a2)
 
 	for i := 0; i < 50; i++ {

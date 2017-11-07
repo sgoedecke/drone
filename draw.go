@@ -12,19 +12,24 @@ func (w *World) Draw() {
 	}
 
 	// draw anthills & ants
-	for _, hill := range w.Anthills {
+	for ai, hill := range w.Anthills {
 		hill.Draw()
+
+		// draw hill stats
+		for i := 0; i < hill.Food; i++ {
+			termbox.SetCell(w.X+i, w.Y+w.Height+ai+2, 64, hill.Color, termbox.ColorDefault)
+		}
 	}
 
 	// draw walls
-	for y := 0; y < w.Height; y++ {
-		termbox.SetCell(w.X-1, w.Y+y, 35, termbox.ColorDefault, termbox.ColorDefault)       //#
-		termbox.SetCell(w.X+w.Width, w.Y+y, 35, termbox.ColorDefault, termbox.ColorDefault) //#
+	for y := 0; y < w.Height+1; y++ {
+		termbox.SetCell(w.X-1, w.Y+y, 35, termbox.ColorDefault, termbox.ColorDefault)         //#
+		termbox.SetCell(w.X+w.Width+1, w.Y+y, 35, termbox.ColorDefault, termbox.ColorDefault) //#
 	}
 
-	for x := 0; x < w.Width; x++ {
-		termbox.SetCell(w.X+x, w.Y-1, 35, termbox.ColorDefault, termbox.ColorDefault)        //#
-		termbox.SetCell(w.X+x, w.Y+w.Height, 35, termbox.ColorDefault, termbox.ColorDefault) //#
+	for x := 0; x < w.Width+3; x++ {
+		termbox.SetCell(w.X+x-1, w.Y-1, 35, termbox.ColorDefault, termbox.ColorDefault)          //#
+		termbox.SetCell(w.X+x-1, w.Y+w.Height+1, 35, termbox.ColorDefault, termbox.ColorDefault) //#
 	}
 
 	_ = termbox.Flush()

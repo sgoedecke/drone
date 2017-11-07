@@ -11,11 +11,15 @@ type Anthill struct {
 	Pheromones []Pheromone
 	X          int
 	Y          int
+	Food       int
 	Color      termbox.Attribute
 	World      *World
 }
 
 func (ah *Anthill) SpawnAnt() {
+
+	// it costs food to spawn ants
+	ah.Food--
 
 	for _, ant := range ah.Ants {
 		if ant.X == ah.X && ant.Y == ah.Y {
@@ -33,11 +37,24 @@ func (ah *Anthill) SpawnAnt() {
 	ah.Ants = append(ah.Ants, a)
 }
 
+func (ah *Anthill) Die() {
+	for i := range ah.Ants {
+		ant := ah.Ants[i]
+		ant.Die()
+	}
+	ah.Ants = []Ant{}
+}
+
 func (ah *Anthill) Act() {
+	if ah.Food <= 0 {
+		ah.Die()
+		return
+	}
+
 	// random chance to spawn a new ant
 	r := rand.New(rand.NewSource(time.Now().UnixNano())) // have to re-seed each time, apparently :(
-	rint := r.Intn(10)
-	if rint > 8 {
+	rint := r.Intn(100)
+	if rint <= ah.Food {
 		ah.SpawnAnt()
 	}
 

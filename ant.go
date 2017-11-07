@@ -54,6 +54,7 @@ func (a *Ant) Act() {
 		}
 	} else if a.HasFood {
 		if math.Abs(float64(a.X-a.Anthill.X)) < 2.0 && math.Abs(float64(a.Y-a.Anthill.Y)) < 2.0 { // ant is adj to anthill
+			a.Anthill.Food++
 			a.HasFood = false
 			a.Focused = false
 		} else {
@@ -105,6 +106,7 @@ func (a *Ant) MoveTo(x int, y int) {
 func (a *Ant) Die() {
 	// set flag so ant gets cleaned up later
 	a.Dead = true
+	a.World.SpawnFood(a.X, a.Y)
 }
 
 func (a *Ant) Eat(f *Food) {
@@ -133,7 +135,8 @@ func (a *Ant) Move(x int, y int) {
 
 	// check for collision with other ants
 	for _, anthill := range a.World.Anthills {
-		for _, ant := range anthill.Ants {
+		for i := range anthill.Ants {
+			ant := anthill.Ants[i]
 			if ant.X == x && ant.Y == y && !ant.Dead {
 				a.World.HandleCollision(&ant, a)
 				return
