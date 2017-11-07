@@ -20,11 +20,11 @@ func (w *World) Draw() {
 	for ai, hill := range w.Anthills {
 		hill.Draw()
 
-		// draw anthill stats
-		termbox.SetCell(w.X, w.Y+w.Height+ai+2, 64, hill.Color, termbox.ColorDefault) // anthill
-		for i := 0; i < hill.Food; i++ {
-			termbox.SetCell(w.X+i+1, w.Y+w.Height+ai+2, 176, hill.Color, termbox.ColorDefault) // big dot
-		}
+		// // draw anthill stats
+		// termbox.SetCell(w.X, w.Y+w.Height+ai+2, 64, hill.Color, termbox.ColorDefault) // anthill
+		// for i := 0; i < hill.Food; i++ {
+		// 	termbox.SetCell(w.X+i+1, w.Y+w.Height+ai+2, 176, hill.Color, termbox.ColorDefault) // big dot
+		// }
 	}
 
 	// draw walls

@@ -28,33 +28,13 @@ func main() {
 	w.X = 1
 	w.Y = 1
 
-	a1 := Anthill{}
-	a1.X = 5
-	a1.Y = 5
-	a1.Color = termbox.ColorRed
-	a1.World = &w
-	a1.Food = 5
-	w.Anthills = append(w.Anthills, a1)
+	w.SpawnAnthill(10, 10, termbox.ColorGreen)
+	w.SpawnAnthill(70, 30, termbox.ColorRed)
 
-	a2 := Anthill{}
-	a2.X = 76
-	a2.Y = 30
-	a2.Color = termbox.ColorGreen
-	a2.World = &w
-	a2.Food = 5
-	w.Anthills = append(w.Anthills, a2)
-
-	fs := FoodSource{}
-	fs.X = 30
-	fs.Y = 10
-	fs.World = &w
-	w.FoodSources = append(w.FoodSources, fs)
-
-	fs2 := FoodSource{}
-	fs2.X = 50
-	fs2.Y = 30
-	fs2.World = &w
-	w.FoodSources = append(w.FoodSources, fs2)
+	w.SpawnFoodSource(30, 30)
+	w.SpawnFoodSource(20, 20)
+	w.SpawnFoodSource(35, 35)
+	w.SpawnFoodSource(50, 10)
 
 	// kick off the act -> draw loop
 	go w.Loop()

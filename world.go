@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/nsf/termbox-go"
 	"time"
 )
 
@@ -39,6 +40,24 @@ func (w *World) Act() {
 	for i, _ := range w.FoodSources {
 		w.FoodSources[i].Act()
 	}
+}
+
+func (w *World) SpawnAnthill(x int, y int, color termbox.Attribute) {
+	a := Anthill{}
+	a.X = x
+	a.Y = y
+	a.Color = color
+	a.World = w
+	a.Food = 15
+	w.Anthills = append(w.Anthills, a)
+}
+
+func (w *World) SpawnFoodSource(x int, y int) {
+	fs := FoodSource{}
+	fs.X = x
+	fs.Y = y
+	fs.World = w
+	w.FoodSources = append(w.FoodSources, fs)
 }
 
 func (w *World) SpawnFood(x int, y int) {

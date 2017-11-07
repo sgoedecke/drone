@@ -27,8 +27,13 @@ type FoodSource struct {
 }
 
 func (fs *FoodSource) Act() {
-	// random chance to spawn a new ant
 	r := rand.New(rand.NewSource(time.Now().UnixNano())) // have to re-seed each time, apparently :(
+
+	if r.Intn(10) < 8 { // high chance to spawn nothing
+		return
+	}
+
+	// random chance to spawn a new food tile
 	x := r.Intn(7) - 3 + fs.X
 	y := r.Intn(7) - 3 + fs.Y
 	spotTaken := false
